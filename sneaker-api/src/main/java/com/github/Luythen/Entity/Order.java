@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "ORDER")
+@Table(name = "t_ORDER")
 public class Order {
     
     @Id
@@ -31,7 +31,7 @@ public class Order {
         createdAt = LocalDateTime.now();
     }
     
-    
+
 
     public int getOrderId() {
         return orderId;
