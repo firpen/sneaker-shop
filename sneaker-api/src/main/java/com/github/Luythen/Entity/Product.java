@@ -26,11 +26,11 @@ public class Product {
      * private Category category;
      */
 
-    @Column(length = 200, name = "product_name")
+    @Column(length = 200, name = "product_name", nullable = false)
     @NotEmpty
     private String name;
 
-    @Column(length = 500, name = "description")
+    @Column(length = 500, name = "description", nullable = false)
     @NotEmpty
     private String description;
 
@@ -41,6 +41,44 @@ public class Product {
     @Column(name = "isActive")
     private boolean isActive;
 
+    // Konstruktor
     public Product() {
+    }
+
+    // Getters & Setters
+    public Long getProductId() {
+        return productId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }
