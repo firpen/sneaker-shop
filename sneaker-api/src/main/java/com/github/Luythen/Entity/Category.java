@@ -19,4 +19,8 @@ public class Category {
     @Column(length = 200, name = "name", nullable = false)
     @NotEmpty
     private String name;
+
+    // Konstruktor
+    public Category() {
+    }
 }
