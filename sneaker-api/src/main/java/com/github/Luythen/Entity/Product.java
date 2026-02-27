@@ -40,4 +40,7 @@ public class Product {
 
     @Column(name = "isActive")
     private boolean isActive;
+
+    public Product() {
+    }
 }
