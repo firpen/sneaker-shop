@@ -37,4 +37,41 @@ public class ProductVariant {
     // Konstruktor
     public ProductVariant() {
     }
+
+    // Getters & Setters
+    public Long getVariantId() {
+        return variantId;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public double getPriceOverride() {
+        return priceOverride;
+    }
+
+    public void setPriceOverride(double priceOverride) {
+        this.priceOverride = priceOverride;
+    }
 }
