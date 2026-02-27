@@ -33,4 +33,8 @@ public class ProductVariant {
     @Column(name = "priceOverride")
     @DecimalMin(value = "0.0", inclusive = false)
     private double priceOverride;
+
+    // Konstruktor
+    public ProductVariant() {
+    }
 }
