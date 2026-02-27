@@ -12,6 +12,7 @@ public class Cart {
     @Column(name = "cartId")
     private int cartId;
     
+    @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
     private User user;
     
