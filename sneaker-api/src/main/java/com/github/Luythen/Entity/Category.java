@@ -23,4 +23,17 @@ public class Category {
     // Konstruktor
     public Category() {
     }
+
+    // Getters & Setters
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
