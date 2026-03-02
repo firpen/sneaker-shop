@@ -48,7 +48,7 @@ public class AuthResource {
         try {
             User user = userService.authenticate(userDto);
             String token = Jwt.issuer("http://localhost:5050/issuer")
-                .upn(user.getUserId()).groups("user").expiresIn(7200).sign();
+                .upn(user.getUserId()).groups(user.getRole().getDesc()).expiresIn(7200).sign();
 
             NewCookie cookie = new NewCookie.Builder("token")
                     .value(token)
