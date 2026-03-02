@@ -1,7 +1,9 @@
 package com.github.Luythen.Entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
@@ -24,6 +27,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
     private Category category;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductVariant> productVariants;
 
     @Column(length = 200, name = "product_name", nullable = false)
     @NotEmpty
@@ -80,4 +86,9 @@ public class Product {
     public void setActive(boolean isActive) {
         this.isActive = isActive;
     }
+
+    public List<ProductVariant> getProductVariants() {
+        return productVariants;
+    }
+
 }

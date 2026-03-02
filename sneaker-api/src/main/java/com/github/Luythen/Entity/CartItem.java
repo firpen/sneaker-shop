@@ -1,7 +1,5 @@
 package com.github.Luythen.Entity;
 
-import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity

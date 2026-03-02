@@ -1,5 +1,7 @@
 package com.github.Luythen.Entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
@@ -16,14 +18,14 @@ public class OrderItem {
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "product_variant")
+    @JoinColumn(name = "variantId")
     private ProductVariant productVariant;
 
     @Min(1)
     private int quantity;
 
     @Positive
-    private double price;
+    private BigDecimal price;
 
     public int getOrderItemId() {
         return orderItemId;
@@ -57,11 +59,11 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
