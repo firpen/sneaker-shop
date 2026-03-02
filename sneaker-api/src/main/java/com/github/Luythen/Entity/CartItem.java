@@ -1,5 +1,7 @@
 package com.github.Luythen.Entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,8 +17,9 @@ public class CartItem {
 	@JoinColumn(name = "cartId", nullable = false)
 	private Cart cart;
 
-	@Column(name = "variantId", nullable = false)
-	private int variantId;
+	@ManyToOne
+	@JoinColumn(name = "variantId", nullable = false)
+	private ProductVariant productVariant;
 
 	@Column(name = "quantity", nullable = false)
 	private int quantity;
@@ -37,14 +40,6 @@ public class CartItem {
 		this.cart = cart;
 	}
 
-	public int getVariantId() {
-		return variantId;
-	}
-
-	public void setVariantId(int variantId) {
-		this.variantId = variantId;
-	}
-
 	public int getQuantity() {
 		return quantity;
 	}
@@ -52,4 +47,9 @@ public class CartItem {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public ProductVariant getProductVariant() {
+		return productVariant;
+	}
+
 }

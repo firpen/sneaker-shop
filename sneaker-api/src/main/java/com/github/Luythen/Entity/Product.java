@@ -1,5 +1,7 @@
 package com.github.Luythen.Entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +35,7 @@ public class Product {
 
     @Column(name = "price")
     @DecimalMin(value = "0.0", inclusive = false)
-    private double price;
+    private BigDecimal price;
 
     @Column(name = "isActive")
     private boolean isActive;
@@ -63,11 +65,11 @@ public class Product {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
