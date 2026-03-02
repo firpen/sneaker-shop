@@ -1,5 +1,8 @@
 package com.github.Luythen.Entity;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
