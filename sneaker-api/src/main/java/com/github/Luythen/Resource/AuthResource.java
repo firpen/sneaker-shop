@@ -67,7 +67,7 @@ public class AuthResource {
 
     @GET
     @Path("/me")
-    @RolesAllowed({ "user", "admin" })
+    @RolesAllowed({ "User", "Admin" })
     public Response me (@Context SecurityContext ctx) {
         if (ctx.getUserPrincipal().getName().equals(jwt.getName())) {
             try {
