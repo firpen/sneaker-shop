@@ -2,6 +2,9 @@ package com.github.Luythen.Entity;
 
 import java.time.LocalDateTime;
 
+import com.github.Luythen.Enum.Role;
+
+import io.quarkus.elytron.security.common.BcryptUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,8 +21,8 @@ import jakarta.validation.constraints.Size;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String userId;
 
     @NotBlank
     @Email
@@ -28,6 +31,8 @@ public class User {
 
     @NotBlank
     private String passwordHash;
+
+    private Role role;
 
     @NotBlank
     @Size(min = 2, max = 50)
@@ -45,11 +50,11 @@ public class User {
         this.createdAt = LocalDateTime.now();
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -66,7 +71,7 @@ public class User {
     }
 
     public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+        this.passwordHash = BcryptUtil.bcryptHash(passwordHash);
     }
 
     public String getFirstName() {
@@ -87,6 +92,14 @@ public class User {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
 }
