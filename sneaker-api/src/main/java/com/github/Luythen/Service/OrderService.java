@@ -59,7 +59,7 @@ public class OrderService {
                     ? cartItem.getProductVariant().getPriceOverride()
                     : cartItem.getProductVariant().getProduct().getPrice();
 
-            orderItem.setPrice(price.doubleValue());
+            orderItem.setPrice(price);
             total = total.add(price.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
 
             em.persist(orderItem);
