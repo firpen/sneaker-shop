@@ -1,10 +1,13 @@
 package com.github.Luythen.Entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -19,6 +22,9 @@ public class Category {
     @Column(length = 200, name = "name", nullable = false)
     @NotEmpty
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 
     // Konstruktor
     public Category() {
@@ -35,5 +41,9 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
     }
 }
