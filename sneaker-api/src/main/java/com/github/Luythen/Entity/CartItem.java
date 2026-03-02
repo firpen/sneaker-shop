@@ -50,4 +50,8 @@ public class CartItem {
 		return productVariant;
 	}
 
+    public void setProductVariant(ProductVariant productVariant) {
+        this.productVariant = productVariant;
+    }
+
 }
