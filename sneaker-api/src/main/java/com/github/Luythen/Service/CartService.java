@@ -49,7 +49,7 @@ public class CartService {
         if (variant == null) throw new IllegalArgumentException("Variant not found");
         List<CartItem> items = getCartItems(userId);
         for (CartItem item : items) {
-            if (item.getVariantId() == variantId) {
+            if (item.getProductVariant() != null && item.getProductVariant().getVariantId() == variantId) {
                 item.setQuantity(item.getQuantity() + quantity);
                 em.merge(item);
                 return;
@@ -57,7 +57,7 @@ public class CartService {
         }
         CartItem newItem = new CartItem();
         newItem.setCart(cart);
-        newItem.setVariantId(variantId);
+        newItem.setProductVariant(variant);
         newItem.setQuantity(quantity);
         em.persist(newItem);
     }
