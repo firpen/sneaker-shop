@@ -1,7 +1,5 @@
 package com.github.Luythen.Entity;
 
-import java.math.BigDecimal;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
@@ -24,6 +24,15 @@ public class ProductVariant {
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "productId", nullable = false)
     private Product product;
+
+    @OneToOne(mappedBy = "productVariant")
+    private Inventory inventory;
+
+    @OneToMany(mappedBy = "productVariant")
+    private List<CartItem> cartItems;
+
+    @OneToMany(mappedBy = "productVariant")
+    private List<OrderItem> orderItems;
 
     @Column(name = "size", nullable = false)
     @NotEmpty
@@ -76,5 +85,13 @@ public class ProductVariant {
 
     public void setPriceOverride(BigDecimal priceOverride) {
         this.priceOverride = priceOverride;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 }
