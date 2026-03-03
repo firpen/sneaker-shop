@@ -1,5 +1,7 @@
 package com.github.Luythen.Service;
 
+import java.util.List;
+
 import com.github.Luythen.Entity.Product;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -39,6 +41,14 @@ public class ProductService {
     public Product getProductById(int id) {
         try {
             return em.find(Product.class, id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Product> getAllProducts() {
+        try {
+            return em.createQuery("SELECT p FROM product p", Product.class).getResultList();
         } catch (Exception e) {
             return null;
         }
