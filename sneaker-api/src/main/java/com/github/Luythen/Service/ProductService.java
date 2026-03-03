@@ -38,7 +38,7 @@ public class ProductService {
         }
     }
 
-    public Product getProductById(int id) {
+    public Product getProductById(Long id) {
         try {
             return em.find(Product.class, id);
         } catch (Exception e) {
@@ -55,7 +55,7 @@ public class ProductService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public Product updateProduct(int id, Product updatedProduct) throws Exception {
+    public Product updateProduct(Long id, Product updatedProduct) throws Exception {
         Product product = getProductById(id);
         if (product == null) {
             throw new Exception("Product not found");
@@ -69,7 +69,7 @@ public class ProductService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public boolean deleteProduct(int id) throws Exception {
+    public boolean deleteProduct(Long id) throws Exception {
         Product product = getProductById(id);
         if (product == null) {
             throw new Exception("Product not found");
