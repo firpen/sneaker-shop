@@ -6,8 +6,8 @@ import com.github.Luythen.Service.ProductService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -48,6 +48,18 @@ public class ProductResource {
             return Response.status(Response.Status.CREATED).entity(product).build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @RolesAllowed("Admin")
+    public Response delete(@PathParam("id") Long id) {
+        try {
+            productService.deleteProduct(id);
+            return Response.noContent().build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
 }
