@@ -53,4 +53,18 @@ public class ProductService {
             return null;
         }
     }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public Product updateProduct(int id, Product updatedProduct) throws Exception {
+        Product product = getProductById(id);
+        if (product == null) {
+            throw new Exception("Product not found");
+        }
+        product.setName(updatedProduct.getName());
+        product.setDescription(updatedProduct.getDescription());
+        product.setPrice(updatedProduct.getPrice());
+        product.setCategory(updatedProduct.getCategory());
+
+        return product;
+    }
 }
