@@ -6,6 +6,7 @@ import com.github.Luythen.Entity.User;
 import com.github.Luythen.Service.UserService;
 
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -21,6 +22,7 @@ import jakarta.ws.rs.core.SecurityContext;
 @Path("/api/users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@RequestScoped
 public class UserResource {
 
     @Inject

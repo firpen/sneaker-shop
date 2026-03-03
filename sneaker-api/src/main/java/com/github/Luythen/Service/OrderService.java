@@ -92,8 +92,8 @@ public class OrderService {
 
     public List<Order> getAllOrders() {
         try {
-            return em.createQuery("SELECT o FROM Order o", Order.class).getResultList()M
-        }   catch (Exception e) {
+            return em.createQuery("SELECT o FROM Order o", Order.class).getResultList();
+        } catch (Exception e) {
             return null;
         }
     }
