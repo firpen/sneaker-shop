@@ -22,11 +22,12 @@ public class CartService {
 
     public Cart getOrCreateCart(String userId) {
         User user = em.find(User.class, userId);
-        if (user == null) throw new IllegalArgumentException("User not found");
+        if (user == null)
+            throw new IllegalArgumentException("User not found");
         try {
             return em.createQuery("SELECT c FROM Cart c WHERE c.user.userId = :userId", Cart.class)
-                .setParameter("userId", userId)
-                .getSingleResult();
+                    .setParameter("userId", userId)
+                    .getSingleResult();
         } catch (NoResultException e) {
             Cart cart = new Cart();
             cart.setUser(user);
@@ -38,15 +39,16 @@ public class CartService {
     public List<CartItem> getCartItems(String userId) {
         Cart cart = getOrCreateCart(userId);
         return em.createQuery("SELECT ci FROM CartItem ci WHERE ci.cart.cartId = :cartId", CartItem.class)
-            .setParameter("cartId", cart.getCartId())
-            .getResultList();
+                .setParameter("cartId", cart.getCartId())
+                .getResultList();
     }
 
     @Transactional
     public void addItem(String userId, int variantId, int quantity) {
         Cart cart = getOrCreateCart(userId);
-        ProductVariant variant = em.find(ProductVariant.class, (long)variantId);
-        if (variant == null) throw new IllegalArgumentException("Variant not found");
+        ProductVariant variant = em.find(ProductVariant.class, (long) variantId);
+        if (variant == null)
+            throw new IllegalArgumentException("Variant not found");
         List<CartItem> items = getCartItems(userId);
         for (CartItem item : items) {
             if (item.getProductVariant() != null && item.getProductVariant().getVariantId() == variantId) {
@@ -65,7 +67,8 @@ public class CartService {
     @Transactional
     public void updateItemQuantity(String userId, int cartItemId, int quantity) {
         CartItem item = em.find(CartItem.class, cartItemId);
-        if (item == null) throw new IllegalArgumentException("CartItem not found");
+        if (item == null)
+            throw new IllegalArgumentException("CartItem not found");
         item.setQuantity(quantity);
         em.merge(item);
     }
