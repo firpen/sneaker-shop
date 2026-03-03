@@ -2,7 +2,11 @@ package com.github.Luythen.Service;
 
 import java.util.List;
 
+import com.github.Luythen.Dto.NewProductDto;
+import com.github.Luythen.Dto.ProductVariantDto;
+import com.github.Luythen.Entity.Category;
 import com.github.Luythen.Entity.Product;
+import com.github.Luythen.Entity.ProductVariant;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -16,6 +20,9 @@ public class ProductService {
     @Inject
     EntityManager em;
 
+    @Inject
+    CategoryService categoryService;
+
     public Product getProductByName(String name) {
         try {
             return em.createQuery("SELECT p FROM Product p WHERE p.name = :name", Product.class)
@@ -27,14 +34,41 @@ public class ProductService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public void createProduct(Product product) throws Exception {
-        if (getProductByName(product.getName()) != null) {
+    public Product createProduct(NewProductDto newProductDto) throws Exception {
+        if (getProductByName(newProductDto.getName()) != null) {
             throw new Exception("Product with that name already exists");
         }
+
+        Category category = em.find(Category.class, Long.valueOf(newProductDto.getCategory()));
+        if (category == null) {
+            throw new Exception("Category with that id does not exits");
+        }
+
         try {
+            
+            Product product = new Product();
+            product.setActive(newProductDto.isActive());
+            product.setCategory(category);
+            product.setName(newProductDto.getName());
+            product.setDescription(newProductDto.getDescription());
+
             em.persist(product);
+
+            return product;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
+        }
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void createProductVariant (Product product, ProductVariantDto[] productVariants) {
+        for (ProductVariantDto pv : productVariants) {
+            ProductVariant productVariant = new ProductVariant();
+            productVariant.setProduct(product);
+            productVariant.setSize(pv.getSize());
+            productVariant.setColor(pv.getColor());
+
+            em.persist(productVariant);
         }
     }
 
