@@ -4,11 +4,13 @@ import java.util.List;
 
 import com.github.Luythen.Entity.Category;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 @Transactional
+@ApplicationScoped
 public class CategoryService {
 
     @Inject
