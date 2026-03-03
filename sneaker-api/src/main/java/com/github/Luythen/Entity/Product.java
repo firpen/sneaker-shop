@@ -3,6 +3,7 @@ package com.github.Luythen.Entity;
 import java.math.BigDecimal;
 import java.util.List;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,6 +30,7 @@ public class Product {
     private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonbTransient
     private List<ProductVariant> productVariants;
 
     @Column(length = 200, name = "product_name", nullable = false)

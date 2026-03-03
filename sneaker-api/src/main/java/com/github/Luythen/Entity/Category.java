@@ -2,6 +2,7 @@ package com.github.Luythen.Entity;
 
 import java.util.List;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "categoryId")
     private Long categoryId;
 
     @Column(length = 200, name = "name", nullable = false)
@@ -24,6 +26,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
+    @JsonbTransient
     private List<Product> products;
 
     // Konstruktor

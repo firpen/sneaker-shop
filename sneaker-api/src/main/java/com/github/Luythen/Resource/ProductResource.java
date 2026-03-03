@@ -1,5 +1,6 @@
 package com.github.Luythen.Resource;
 
+import com.github.Luythen.Dto.NewProductDto;
 import com.github.Luythen.Entity.Product;
 import com.github.Luythen.Service.ProductService;
 
@@ -43,10 +44,11 @@ public class ProductResource {
 
     @POST
     @RolesAllowed("Admin")
-    public Response create(Product product) {
+    public Response create(NewProductDto newProductDto) {
         try {
-            productService.createProduct(product);
-            return Response.status(Response.Status.CREATED).entity(product).build();
+            Product product = productService.createProduct(newProductDto);
+            productService.createProductVariant(product, newProductDto.getProductVariant());
+            return Response.status(Response.Status.CREATED).entity(productService.getProductById(product.getProductId())).build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
