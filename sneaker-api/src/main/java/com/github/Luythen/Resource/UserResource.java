@@ -55,7 +55,7 @@ public class UserResource {
     }
 
     @DELETE
-    @Path("{/id}")
+    @Path("/{id}")
     @RolesAllowed({ "User", "Admin" })
     public Response deleteUser(@PathParam("id") String id, @Context SecurityContext ctx) {
         try {
