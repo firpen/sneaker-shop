@@ -92,9 +92,10 @@ public class OrderService {
 
     public List<Order> getAllOrders() {
         try {
-            return em.createQuery("SELECT o FROM Order o", Order.class).getResultList()M
+            return em.createQuery("SELECT o FROM Order o", Order.class).getResultList();
         }   catch (Exception e) {
             return null;
         }
     }
+
 }
