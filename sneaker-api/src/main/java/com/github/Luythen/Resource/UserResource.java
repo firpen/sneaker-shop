@@ -10,7 +10,6 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -48,14 +47,14 @@ public class UserResource {
                 return Response.status(404).entity("User not found").build();
             }
             return Response.ok(user).build();
-        }   catch(Exception e) {
+        } catch (Exception e) {
             return Response.status(500).entity(e.getMessage()).build();
         }
     }
 
     @DELETE
     @Path("{/id}")
-    @RolesAllowed({"User", "Admin"})
+    @RolesAllowed({ "User", "Admin" })
     public Response deleteUser(@PathParam("id") String id, @Context SecurityContext ctx) {
         try {
             boolean isAdmin = ctx.isUserInRole("Admin");
@@ -67,7 +66,7 @@ public class UserResource {
 
             userService.deleteUser(id);
             return Response.noContent().build();
-        }   catch (Exception e) {
+        } catch (Exception e) {
             return Response.status(500).entity(e.getMessage()).build();
         }
     }

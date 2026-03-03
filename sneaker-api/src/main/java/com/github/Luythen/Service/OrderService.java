@@ -1,6 +1,7 @@
 package com.github.Luythen.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.github.Luythen.Entity.Cart;
 import com.github.Luythen.Entity.CartItem;
@@ -19,7 +20,7 @@ public class OrderService {
     @Inject
     EntityManager em;
 
-    private Cart getCartByUserId(int userId) {
+    private Cart getCartByUserId(String userId) {
         try {
             return em.createQuery("Select c FROM Cart c WHERE c.user.userId = :userId", Cart.class)
                     .setParameter("userId", userId)
@@ -30,7 +31,7 @@ public class OrderService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public Order createOrderFromCart(int userId) throws Exception {
+    public Order createOrderFromCart(String userId) throws Exception {
 
         Cart cart = getCartByUserId(userId);
 
@@ -69,6 +70,31 @@ public class OrderService {
         cart.getCartItems().clear();
 
         return order;
+    }
 
+    public List<Order> getOrdersByUserId(String userId) {
+        try {
+            return em.createQuery("SELECT o FROM Order o WHERE o.user.userId = :userId", Order.class)
+                    .setParameter("userId", userId)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Order getOrderById(int orderId) {
+        try {
+            return em.find(Order.class, orderId);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Order> getAllOrders() {
+        try {
+            return em.createQuery("SELECT o FROM Order o", Order.class).getResultList()M
+        }   catch (Exception e) {
+            return null;
+        }
     }
 }
