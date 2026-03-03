@@ -44,4 +44,12 @@ public class Inventory {
     public void setStockQty(int stockQty) {
         this.stockQty = stockQty;
     }
+    
+    public ProductVariant getProductVariant() {
+        return productVariant;
+    }
+    
+    public void setProductVariant(ProductVariant productVariant) {
+        this.productVariant = productVariant;
+    }
 }
