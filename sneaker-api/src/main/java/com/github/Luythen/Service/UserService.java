@@ -1,5 +1,7 @@
 package com.github.Luythen.Service;
 
+import java.util.List;
+
 import javax.security.sasl.AuthenticationException;
 
 import com.github.Luythen.Dto.UserDto;
@@ -19,7 +21,7 @@ public class UserService {
     EntityManager em;
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public void createNewUser (User user) throws Exception {
+    public void createNewUser(User user) throws Exception {
         if (getUserByEmail(user.getEmail()) != null) {
             throw new Exception("Account already exits with that email");
         }
@@ -31,16 +33,17 @@ public class UserService {
         }
     }
 
-    private User getUserByEmail (String email) {
+    private User getUserByEmail(String email) {
         try {
-            User user = (User) em.createQuery("SELECT u FROM User u WHERE u.email =:email").setParameter("email", email).getSingleResult();
+            User user = (User) em.createQuery("SELECT u FROM User u WHERE u.email =:email").setParameter("email", email)
+                    .getSingleResult();
             return user;
         } catch (Exception e) {
             return null;
         }
     }
 
-    public User authenticate (UserDto userDto) throws Exception {
+    public User authenticate(UserDto userDto) throws Exception {
         User user = getUserByEmail(userDto.getEmail());
 
         if (user == null) {
@@ -55,12 +58,33 @@ public class UserService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public User getUserByID (String id) throws Exception {
+    public User getUserByID(String id) throws Exception {
         try {
             User user = em.find(User.class, id);
             return user;
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    public List<User> getAllUsers() {
+        try {
+            return em.createQuery("SELECT u FROM User u", User.class).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void deleteUser(String id) throws Exception {
+        try {
+            User user = em.find(User.class, id);
+            if (user == null) {
+                throw new Exception("User not found");
+            }
+            em.remove(user);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
     }
 
