@@ -48,7 +48,7 @@ public class ProductService {
 
     public List<Product> getAllProducts() {
         try {
-            return em.createQuery("SELECT p FROM product p", Product.class).getResultList();
+            return em.createQuery("SELECT p FROM Product p", Product.class).getResultList();
         } catch (Exception e) {
             return null;
         }
@@ -66,5 +66,19 @@ public class ProductService {
         product.setCategory(updatedProduct.getCategory());
 
         return product;
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public boolean deleteProduct(int id) throws Exception {
+        Product product = getProductById(id);
+        if (product == null) {
+            throw new Exception("Product not found");
+        }
+        try {
+            em.remove(product);
+            return true;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }
