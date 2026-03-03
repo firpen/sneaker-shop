@@ -35,4 +35,12 @@ public class ProductService {
             throw new Exception(e.getMessage());
         }
     }
+
+    public Product getProductById(int id) {
+        try {
+            return em.find(Product.class, id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
