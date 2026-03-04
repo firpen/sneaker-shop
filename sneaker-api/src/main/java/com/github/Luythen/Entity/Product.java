@@ -23,6 +23,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonbTransient
     private Long productId;
 
     @ManyToOne
@@ -45,6 +46,7 @@ public class Product {
     private BigDecimal price;
 
     @Column(name = "isActive")
+    @JsonbTransient
     private boolean isActive;
 
     // Konstruktor
