@@ -5,7 +5,7 @@ export const useSession = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        fetch("http://localhost:5050/api/auth/me", {
+        fetch("http://localhost:8080/api/auth/me", {
             headers: {
                 "Content-Type": "application/json"
             },
