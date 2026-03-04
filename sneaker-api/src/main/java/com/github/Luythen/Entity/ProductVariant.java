@@ -23,6 +23,7 @@ public class ProductVariant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonbTransient
     private Long variantId;
 
     @ManyToOne
@@ -34,9 +35,11 @@ public class ProductVariant {
     private Inventory inventory;
 
     @OneToMany(mappedBy = "productVariant")
+    @JsonbTransient
     private List<CartItem> cartItems;
 
     @OneToMany(mappedBy = "productVariant")
+    @JsonbTransient
     private List<OrderItem> orderItems;
 
     @Column(name = "size", nullable = false)
@@ -56,6 +59,7 @@ public class ProductVariant {
     }
 
     // Getters & Setters
+    @JsonbTransient
     public Long getVariantId() {
         return variantId;
     }
