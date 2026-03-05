@@ -10,7 +10,7 @@ function Login () {
     if (isLoggedIn) return window.location.href = "/"
 
     const handleClick= () => {
-        fetch("http://localhost:5050/api/auth/login", {
+        fetch("http://localhost:8080/api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
