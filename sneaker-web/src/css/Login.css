@@ -1,0 +1,63 @@
+.container {
+    display: block;
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+
+.card{
+    margin-top: 7rem;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #afadad;
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.card-item {
+    grid-row: 1 / span 2;
+}
+
+.card form {
+    padding: 20px;
+    margin-left: 7rem;
+    margin-right: 7rem;
+}
+
+.card h1 {
+    text-align: center;
+}
+
+.card img {
+    height: 40rem;
+    width: 100%;
+    display: block;
+    margin: auto;
+    border-radius: 0 5px 5px 0;
+}
+
+.card input {
+    border: 1px solid #afadad;
+    border-radius: 4px;
+    width: 96%;
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.card button {
+    border: 1px solid #EA454C;
+    border-radius: 5%;
+    display: block;
+    margin: auto;
+    background-color: #EA454C;
+    padding: 10px 20px;
+    color: #ffffff;
+    width: 12rem;
+}
+
+.card a {
+    margin-top: 15rem;
+    text-align: center;
+    display: block;
+}
