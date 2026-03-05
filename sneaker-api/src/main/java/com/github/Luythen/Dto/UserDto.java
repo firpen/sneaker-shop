@@ -1,7 +1,10 @@
 package com.github.Luythen.Dto;
+import jakarta.validation.constraints.NotBlank;
 
 public class UserDto {
+    @NotBlank(message = "Cannot be empty")
     private String email;
+    @NotBlank(message = "Cannot be empty")
     private String password;
     
     public String getEmail() {
