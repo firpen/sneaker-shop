@@ -1,3 +1,77 @@
+/* --- Footer --- */
+/* --- Modern Footer --- */
+.footer {
+  width: 100%;
+  background: #fff;
+  color: #111;
+  margin-top: 48px;
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+  border-top: 1px solid #eee;
+  padding: 0;
+}
+.footer-divider {
+  height: 1px;
+  background: #eee;
+  width: 100%;
+}
+.footer-content.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  padding: 40px 24px 32px 24px;
+  justify-content: flex-start;
+}
+.footer-brand {
+  flex: 1.5;
+  min-width: 220px;
+}
+.footer-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.footer-desc {
+  color: #444;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+.footer-socials {
+  display: flex;
+  gap: 18px;
+  margin-top: 8px;
+}
+.footer-social svg {
+  display: block;
+  transition: stroke 0.2s;
+}
+.footer-social:hover svg {
+  stroke: #111;
+}
+.footer-links-col {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.footer-links-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #111;
+}
+.footer-link {
+  color: #444;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: #111;
+}
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
 /* --- Shop Our Icons Section --- */

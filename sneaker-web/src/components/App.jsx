@@ -49,4 +49,46 @@ function Navbar() {
   );
 }
 
-export default App;
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-divider" />
+      <div className="footer-content footer-grid">
+        <div className="footer-brand">
+          <div className="footer-logo">NIKE</div>
+          <div className="footer-desc">Descriptive line about what your company does.</div>
+        </div>
+        <div className="footer-links-col">
+          <div className="footer-links-title">Features</div>
+          <a href="#" className="footer-link">Core features</a>
+          <a href="#" className="footer-link">Pro experience</a>
+          <a href="#" className="footer-link">Integrations</a>
+        </div>
+        <div className="footer-links-col">
+          <div className="footer-links-title">Learn more</div>
+          <a href="#" className="footer-link">Blog</a>
+          <a href="#" className="footer-link">Case studies</a>
+          <a href="#" className="footer-link">Customer stories</a>
+        </div>
+        <div className="footer-links-col">
+          <div className="footer-links-title">Support</div>
+          <a href="#" className="footer-link">Contact</a>
+          <a href="#" className="footer-link">Support</a>
+          <a href="#" className="footer-link">Legal</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function AppWithFooter() {
+  return (
+    <>
+      <App />
+      <Footer />
+    </>
+  );
+}
+
+export default AppWithFooter;
