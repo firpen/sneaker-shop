@@ -1,6 +1,6 @@
 function Home () {
     return (
-        <h1>Hello</h1>
+        <img src="home.jpg" alt="Home" className="home-image" />
     )
 }
 
