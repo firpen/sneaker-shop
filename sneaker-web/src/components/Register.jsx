@@ -46,11 +46,11 @@ function Register () {
     }
 
     const handleFirstNameChange = (e) => {
-        setEmail(e.target.value)
+        setfirstName(e.target.value)
     }
 
     const handleLastNameChange = (e) => {
-        setPassword(e.target.value)
+        setlastName(e.target.value)
     }
 
 
