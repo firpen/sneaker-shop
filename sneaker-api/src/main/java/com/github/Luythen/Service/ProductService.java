@@ -51,6 +51,7 @@ public class ProductService {
             product.setCategory(category);
             product.setName(newProductDto.getName());
             product.setDescription(newProductDto.getDescription());
+            product.setPrice(newProductDto.getPrice());
 
             em.persist(product);
 
