@@ -44,7 +44,7 @@ public class AuthResource {
     @POST
     @Path("/login")
     @PermitAll
-    public Response login (UserDto userDto) {
+    public Response login (@Valid UserDto userDto) {
         try {
             User user = userService.authenticate(userDto);
             String token = Jwt.issuer("http://localhost:5050/issuer")
