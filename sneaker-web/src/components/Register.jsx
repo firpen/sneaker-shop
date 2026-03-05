@@ -19,7 +19,7 @@ function Register () {
             },
             body: JSON.stringify({
                 "email": email,
-                "password": password,
+                "passwordHash": password,
                 "firstName": firstName,
                 "lastName": lastName
             }),
