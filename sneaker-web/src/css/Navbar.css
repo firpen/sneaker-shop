@@ -3,24 +3,31 @@
 }
 .navbar-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 16px 32px 0 32px;
-  background: transparent ;
+  background: transparent;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 10;
   box-sizing: border-box;
+  height: 80px;
 }
 .navbar-logo {
   width: 120px;
-  height: auto;
+  height: 48px;
+  object-fit: contain;
+  display: block;
 }
 .navbar-links {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: 32px;
+  height: 100%;
 }
 .navbar-link {
   color: #111;

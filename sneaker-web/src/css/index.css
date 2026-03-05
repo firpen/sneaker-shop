@@ -1,3 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+/* --- Shop Our Icons Section --- */
+.shop-icons-section {
+  margin: 48px auto 0 auto;
+  max-width: 1200px;
+  text-align: center;
+}
+.shop-icons-title {
+  font-size: 3rem;
+  font-family: 'Marcellus', serif;
+  margin-bottom: 32px;
+  font-weight: normal;
+}
+.shop-icons-grid {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+.shop-icon-card {
+  border-radius: 16px;
+  padding: 16px 0 0 0;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.shop-icon-img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.shop-icon-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 16px 0 24px 0;
+}
+.shop-icon-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.shop-icon-price {
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: 'Inter', Arial, sans-serif;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -14,7 +62,7 @@ code {
 
 .home-image {
   width: 100%;
-  max-height: 900px;
+  max-height: auto;
   height: auto;
   object-fit: cover;
   display: block;
