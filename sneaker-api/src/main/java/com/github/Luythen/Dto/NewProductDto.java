@@ -1,11 +1,22 @@
 package com.github.Luythen.Dto;
 
+import java.math.BigDecimal;
+
 public class NewProductDto {
     
     private String category;
     private String name;
     private String description;
     private boolean isActive;
+    private BigDecimal price;
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     private ProductVariantDto[] productVariant;
 
