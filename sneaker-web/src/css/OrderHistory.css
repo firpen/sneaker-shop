@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+.order-history {
+  font-family: 'Inter', sans-serif;
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.order-history h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 100px;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-table th,
+.order-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.order-table th {
+  font-weight: 700;
+}
+
+.order-table .summa {
+  text-align: right;
+}

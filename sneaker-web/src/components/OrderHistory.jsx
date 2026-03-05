@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSession } from "./useSession";
+import "../css/OrderHistory.css";
 
 function OrderHistory() {
   const { isLoggedIn } = useSession();
@@ -20,28 +21,28 @@ function OrderHistory() {
   }
 
   return (
-    <div>
+    <div className="order-history">
       <h1>Order history</h1>
-      <table>
+      <table className="order-table">
         <thead>
           <tr>
             <th>Ordernummer</th>
             <th>Datum</th>
-            <th>Summa</th>
+            <th className="summa">Summa</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((order) => (
             <tr key={order.orderId}>
               <td>{order.orderId}</td>
-              <td>{order.createdAt}</td>
-              <td>{order.totalAmount} kr</td>
+              <td>{new Date(order.createdAt).toLocaleDateString('sv-SE')}</td>
+              <td className="summa">{order.totalAmount} kr</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  );
+);
 }
 
 export default OrderHistory;

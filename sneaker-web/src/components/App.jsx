@@ -11,6 +11,7 @@ import Admin from "./Admin/Admin"
 import Inventory from "./Admin/Inventory"
 import AdminProduct from "./Admin/AdminProduct"
 import "../css/Navbar.css";
+import OrderHistory from "./OrderHistory"
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/inventory" element={<Inventory />} />
         <Route path="/admin/product/:productid" element={<AdminProduct />} />
+        <Route path="/order-history" element={<OrderHistory />} />
       </Routes>
     </BrowserRouter>
   );
