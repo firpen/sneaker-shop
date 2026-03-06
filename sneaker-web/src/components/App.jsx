@@ -36,7 +36,7 @@ function App() {
 
 function Navbar() {
   const location = useLocation();
-  const logoSrc = location.pathname === "/" ? "Nike-Logo-White.png" : "Nike-Logo-Black.png";
+  const logoSrc = process.env.PUBLIC_URL + "/" + (location.pathname === "/" ? "Nike-Logo-White.png" : "Nike-Logo-Black.png");
   const isHome = location.pathname === "/";
   return (
     <header className="navbar-container">
