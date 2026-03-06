@@ -121,6 +121,7 @@
        foreign key (product_id) 
        references t_product;
 INSERT INTO users (userid, email, passwordhash, firstname, lastname, role, createdat)  VALUES ('test-user-id-1234', 'test@gmail.com', '$2a$10$aRXAfjvA/RZ3aYoG5GJFrursSK9em90TVYMCkhAEQEr9EWiWb/A0G', 'Test', 'User', 1, NOW());
+INSERT INTO users (userid ,email, passwordhash, firstname, lastname, role, createdat)  VALUES ('admin-1234', 'admin@gmail.com', '$2a$10$aRXAfjvA/RZ3aYoG5GJFrursSK9em90TVYMCkhAEQEr9EWiWb/A0G', 'Admin', 'User', 0, NOW());
 INSERT INTO t_order (userid, status, totalamount, createdat) VALUES ('test-user-id-1234', 'DELIVERED', 1399.95, NOW());
 INSERT INTO t_order (userid, status, totalamount, createdat) VALUES ('test-user-id-1234', 'DELIVERED', 1399.95, NOW());
 INSERT INTO t_order (userid, status, totalamount, createdat) VALUES ('test-user-id-1234', 'DELIVERED', 1399.95, NOW());
