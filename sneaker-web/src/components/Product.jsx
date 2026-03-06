@@ -5,13 +5,8 @@ import '../css/Product.css';
 function Product() {
     const { isLoggedIn, userInfo } = useSession();
 
-    // Only white sneaker variant
-    const [items] = useState([
-        { id: 1, name: "Nike Air Force 1", price: 129, img: "/nike-air-force.png", color: "White" }
-    ]);
     const [color, setColor] = useState("White");
     const [size, setSize] = useState("");
-    // Only white color option
     const colorOptions = [
         { name: "White", value: "White" },
         { name: "Black", value: "Black" }
@@ -24,7 +19,8 @@ function Product() {
     };
 
     // Select image based on color
-    const selectedItem = items.find(item => item.color === color) || items[0];
+    const shoeImg = color === "Black" ? "/nike-air-force-black.png" : "/nike-air-force.png";
+    const selectedItem = { name: "Nike Air Force 1", price: 129, img: shoeImg, color };
 
     return (
         <section className="pageWrap">
