@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../css/Products.css";
+import { useNavigate } from "react-router-dom";
 
 const PRODUCTS = Array.from({ length: 40 }, (_, i) => ({
   id: i + 1,
@@ -11,6 +12,7 @@ const PRODUCTS = Array.from({ length: 40 }, (_, i) => ({
 const unique = (arr, key) => [...new Set(arr.map(item => item[key]))];
 
 function Products() {
+  const navigate = useNavigate();
   const [sort, setSort] = useState("");
   const [category, setCategory] = useState("");
   let filtered = PRODUCTS.slice();
@@ -44,7 +46,12 @@ function Products() {
       <div className="products-grid products-grid-4">
         {paginated.length === 0 && <div className="products-empty">No products found.</div>}
         {paginated.map(product => (
-          <div className="shop-icon-card" key={product.id}>
+          <div
+            className="shop-icon-card"
+            key={product.id}
+            onClick={() => navigate(`/product/${product.id}`)}
+            style={{ cursor: "pointer" }}
+          >
             <img src="nike-air-force.png" alt={product.name} className="shop-icon-img" />
             <div className="shop-icon-info">
               <span className="shop-icon-name">{product.name}</span>
