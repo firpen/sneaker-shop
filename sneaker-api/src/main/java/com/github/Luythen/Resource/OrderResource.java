@@ -11,6 +11,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -88,6 +89,36 @@ public class OrderResource {
             String userId = ctx.getUserPrincipal().getName();
             Order order = orderService.createOrderFromCart(userId);
             return Response.status(Response.Status.CREATED).entity(order).build();
+        }   catch (Exception e) {
+            return Response.status(500).entity(e.getMessage()).build();
+        }
+    }
+
+    @PUT
+    @Path("/{id}/status")
+    @RolesAllowed("Admin")
+    public Response updateStatus(@PathParam("id") int id, String status) {
+        try {
+            Order order = orderService.updateOrderStatus(id, status);
+            if (order == null) {
+                return Response.status(404).entity("Order not found").build();
+            }
+            return Response.ok().build();
+        }   catch (Exception e) {
+            return Response.status(500).entity(e.getMessage()).build();
+        }
+    }
+
+    @PUT
+    @Path("/{id}/cancel")
+    @RolesAllowed("Admin")
+    public Response cancelOrder(@PathParam("id") int id) {
+        try {
+            boolean success = orderService.cancelOrder(id);
+            if (!success) {
+                return Response.status(404).entity("Order not found").build();
+            }
+            return Response.ok("Order cancelled").build();
         }   catch (Exception e) {
             return Response.status(500).entity(e.getMessage()).build();
         }
