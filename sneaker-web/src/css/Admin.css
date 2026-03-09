@@ -1,0 +1,104 @@
+.container {
+    margin-left: 7rem;
+    margin-right: 7rem;
+}
+
+.row {
+    display: grid !important;
+    grid-template-columns: 28% 72%;
+    gap: 20px;
+}
+
+.col-item {
+    grid-row: 1 / span 2;
+}
+
+.admin-card {
+    margin-top: 7rem;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #afadad;
+}
+
+.admin-card h1 {
+    padding: 0 0 0 20px;
+}
+
+.admin-card label {
+    text-align: left !important;
+}
+
+.admin-card form {
+    padding: 0 20px 0 20px;
+}
+
+.admin-card input {
+    border: 1px solid #afadad;
+    border-radius: 4px;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.admin-card input[type="button"] {
+    border: 1px solid rgb(46, 46, 207);
+    border-radius: 5%;
+    display: block;
+    margin: auto;
+    background-color: rgb(46, 46, 207);
+    padding: 10px 20px;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.admin-card input[type="button"]:hover {
+    background-color: rgb(56, 56, 233);
+}
+
+.addvariant {
+    display: grid !important;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 0.1rem;
+}
+
+.addvariant input[type="button"] {
+    background-color: white;
+    width: 100% !important;
+    color: black;
+    border: 1px solid #afadad;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.addvariant input[type="button"]:hover {
+    background-color: rgb(219, 214, 214);
+}
+
+.addvariant .selected {
+    background-color: rgb(18, 131, 18) !important;
+    color: white !important;
+}
+
+.btn {
+    background-color: rgb(46, 46, 207);
+    color: white;
+}
+
+.btn:hover {
+    background-color: rgb(56, 56, 233);
+}
+
+.variantelement {
+    display: flex;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #afadad;
+}
+
+.variantelement input {
+    background-color: red;
+    width: 20%;
+    align-items: end !important;
+    justify-self: end !important;
+}
