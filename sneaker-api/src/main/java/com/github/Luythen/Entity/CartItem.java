@@ -1,5 +1,6 @@
 package com.github.Luythen.Entity;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class CartItem {
 
 	@ManyToOne
 	@JoinColumn(name = "cartId", nullable = false)
+	@JsonbTransient
 	private Cart cart;
 
 	@ManyToOne

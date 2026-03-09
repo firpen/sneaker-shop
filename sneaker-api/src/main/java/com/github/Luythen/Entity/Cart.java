@@ -1,5 +1,6 @@
 package com.github.Luythen.Entity;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,9 +16,11 @@ public class Cart {
 
     @OneToOne
     @JoinColumn(name = "userId", nullable = false)
+    @JsonbTransient
     private User user;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @JsonbTransient
     private List<CartItem> cartItems;
 
     @Column(name = "createdAt", nullable = false)
