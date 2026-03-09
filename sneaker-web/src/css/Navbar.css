@@ -1,3 +1,84 @@
+/* UserMenu styles */
+.user-menu-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.user-menu-btn {
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+  margin-left: 16px;
+  padding: 0;
+}
+.user-menu-btn:hover, .user-menu-btn:focus {
+  background: #f2f2f2;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.user-icon svg {
+  width: 36px;
+  height: 36px;
+  display: block;
+}
+.user-menu-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  min-width: 170px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  z-index: 100;
+  animation: fadeInMenu 0.18s ease;
+}
+@keyframes fadeInMenu {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.user-menu-item {
+  padding: 10px 20px;
+  color: #254a59;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.98rem;
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.user-menu-logout-btn {
+  background: none;
+  border: none;
+  color: #254a59;
+  font-weight: 700;
+  font-size: 0.98rem;
+  width: 100%;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  text-align: center;
+  white-space: nowrap;
+}
+.user-menu-logout-btn:hover {
+  background: #f2f2f2;
+  color: #111;
+}
+.user-menu-item:hover {
+  background: #f2f2f2;
+  color: #111;
+}
 .navbar-links-home .navbar-link {
   color: #fff;
 }
