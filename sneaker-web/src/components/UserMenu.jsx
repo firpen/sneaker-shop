@@ -4,10 +4,9 @@ import React, { useState, useRef, useEffect } from "react";
 import "../css/Navbar.css";
 import { useSession } from "./useSession";
 
-export default function UserMenu() {
+export default function UserMenu({ isLoggedIn, userInfo }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
-  const { isLoggedIn, userInfo } = useSession();
 
   useEffect(() => {
     function handleClickOutside(event) {

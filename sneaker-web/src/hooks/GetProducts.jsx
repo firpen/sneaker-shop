@@ -5,7 +5,7 @@ export const GetProducts = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost:5050/api/products", {
+        fetch("http://localhost:8080/api/products", {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -18,6 +18,8 @@ export const GetProducts = () => {
             }
         }).then((data) => {
             setProducts(data)
+        }).catch((e) => {
+            setError("Internal server error")
         })
     }, [])
 

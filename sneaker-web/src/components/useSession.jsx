@@ -24,6 +24,8 @@ export const useSession = () => {
             if (data != null && data.role === "Admin") {
                 setAdminAccess(true)
             }
+        }).catch((e) => {
+            console.log("Internal server error")
         })
     }, [])
 
