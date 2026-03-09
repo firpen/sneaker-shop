@@ -18,6 +18,24 @@ import { useSession } from "./useSession"
 function App() {
   const { isLoggedIn, userInfo, adminAccess } = useSession();
 
+  const Navbar = () => {
+    const location = useLocation();
+    const logoSrc = process.env.PUBLIC_URL + "/" + (location.pathname === "/" ? "Nike-Logo-White.png" : "Nike-Logo-Black.png");
+    const isHome = location.pathname === "/";
+    return (
+      <header className="navbar-container">
+        <img src={logoSrc} alt="Nike Logo" className="navbar-logo" />
+        <nav className={`navbar-links${isHome ? " navbar-links-home" : ""}`}>
+          <a href="/" className="navbar-link">Home</a>
+          <a href="/products" className="navbar-link">Products</a>
+          <a href="#" className="navbar-link">Contact</a>
+          <a href="#" className="navbar-link">About Us</a>
+          <UserMenu isLoggedIn={isLoggedIn} userInfo={userInfo} />
+        </nav>
+      </header>
+    );
+  }
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -37,25 +55,6 @@ function App() {
     </BrowserRouter>
   );
 }
-
-function Navbar() {
-  const location = useLocation();
-  const logoSrc = process.env.PUBLIC_URL + "/" + (location.pathname === "/" ? "Nike-Logo-White.png" : "Nike-Logo-Black.png");
-  const isHome = location.pathname === "/";
-  return (
-    <header className="navbar-container">
-      <img src={logoSrc} alt="Nike Logo" className="navbar-logo" />
-      <nav className={`navbar-links${isHome ? " navbar-links-home" : ""}`}>
-        <a href="/" className="navbar-link">Home</a>
-        <a href="/products" className="navbar-link">Products</a>
-        <a href="#" className="navbar-link">Contact</a>
-        <a href="#" className="navbar-link">About Us</a>
-        <UserMenu />
-      </nav>
-    </header>
-  );
-}
-
 
 function Footer() {
   return (
