@@ -31,8 +31,12 @@ function Register () {
                 return response.json()
             }
         }).then((data) => {
-            console.log(data.parameterViolations)
+            if (data.parameterViolations != null) {
+                console.log(data.parameterViolations)
+            }
 
+        }).catch((e) => {
+            console.log("Interal server error")
         })
 
     } 
