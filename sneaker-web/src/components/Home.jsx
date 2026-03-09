@@ -1,12 +1,18 @@
-function Home () {
+import { useNavigate } from "react-router-dom";
+
+function Home() {
+    const navigate = useNavigate();
+
     return (
         <div>
             <img src="home.jpg" alt="Home" className="home-image" />
             <section className="shop-icons-section">
                 <h2 className="shop-icons-title">Shop Our Icons</h2>
                 <div className="shop-icons-grid">
-                    {[1,2,3, 4].map((i) => (
-                        <div className="shop-icon-card" key={i}>
+                    {[1, 2, 3, 4].map((i) => (
+                        <div className="shop-icon-card" key={i}
+                            onClick={() => navigate(`/product/${i}`)}
+                            style={{ cursor: "pointer" }}>
                             <img src="nike-air-force.png" alt="Nike Air Force" className="shop-icon-img" />
                             <div className="shop-icon-info">
                                 <span className="shop-icon-name">Nike Air Force</span>
