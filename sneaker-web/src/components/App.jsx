@@ -1,3 +1,4 @@
+import UserMenu from "./UserMenu";
 import '../css/App.css';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Home from "./Home"
@@ -46,6 +47,7 @@ function Navbar() {
         <a href="/products" className="navbar-link">Products</a>
         <a href="#" className="navbar-link">Contact</a>
         <a href="#" className="navbar-link">About Us</a>
+        <UserMenu />
       </nav>
     </header>
   );
