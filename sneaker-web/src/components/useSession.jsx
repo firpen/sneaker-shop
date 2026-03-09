@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 
 export const useSession = () => {
     const [userInfo, setUserInfo] = useState("");
+    const [adminAccess, setAdminAccess] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
@@ -16,14 +17,19 @@ export const useSession = () => {
                 return response.json()
             } else {
                 setIsLoggedIn(false)
+                return;
             }
         }).then((data) => {
             setUserInfo(data)
+            if (data != null && data.role === "Admin") {
+                setAdminAccess(true)
+            }
         })
     }, [])
 
     return {
         isLoggedIn,
-        userInfo
+        userInfo,
+        adminAccess
     }
 }

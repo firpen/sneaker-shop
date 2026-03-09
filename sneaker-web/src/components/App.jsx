@@ -12,8 +12,11 @@ import Inventory from "./Admin/Inventory"
 import AdminProduct from "./Admin/AdminProduct"
 import "../css/Navbar.css";
 import OrderHistory from "./OrderHistory"
+import { useSession } from "./useSession"
 
 function App() {
+  const { isLoggedIn, userInfo, adminAccess } = useSession();
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -25,7 +28,7 @@ function App() {
         <Route path="/user" element={<User />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={ !adminAccess ? <h1>404</h1> : <Admin userInfo={userInfo} />} />
         <Route path="/admin/inventory" element={<Inventory />} />
         <Route path="/admin/product/:productid" element={<AdminProduct />} />
         <Route path="/order-history" element={<OrderHistory />} />
