@@ -31,6 +31,7 @@ public class Product {
     private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonbTransient
     private List<ProductVariant> productVariants;
 
     @Column(length = 200, name = "product_name", nullable = false)

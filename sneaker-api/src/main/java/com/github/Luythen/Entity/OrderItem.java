@@ -2,6 +2,7 @@ package com.github.Luythen.Entity;
 
 import java.math.BigDecimal;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
@@ -15,6 +16,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
+    @JsonbTransient
     private Order order;
 
     @ManyToOne

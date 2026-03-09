@@ -12,7 +12,10 @@ function OrderHistory() {
         credentials: "include",
       })
         .then((res) => res.json())
-        .then((data) => setOrders(data));
+        .then((data) => {
+          setOrders(data);
+          console.log(data);
+        });
     }
   }, [isLoggedIn]);
 
@@ -27,6 +30,10 @@ function OrderHistory() {
         <thead>
           <tr>
             <th>Ordernummer</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Products</th>
             <th>Datum</th>
             <th className="summa">Summa</th>
           </tr>
@@ -35,14 +42,25 @@ function OrderHistory() {
           {orders.map((order) => (
             <tr key={order.orderId}>
               <td>{order.orderId}</td>
-              <td>{new Date(order.createdAt).toLocaleDateString('sv-SE')}</td>
+              <td>{order.user.firstName}</td>
+              <td>{order.user.lastName}</td>
+              <td>{order.user.email}</td>
+              <td>
+                {order.orderItems.map((item) => (
+                  <div key={item.orderItemId}>
+                    {item.productVariant.product.name} - {item.productVariant.color} - Size {" "}
+                    {item.productVariant.size} x {item.quantity} — {item.price} kr
+                  </div>
+                ))}
+              </td>
+              <td>{new Date(order.createdAt).toLocaleDateString("sv-SE")}</td>
               <td className="summa">{order.totalAmount} kr</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-);
+  );
 }
 
 export default OrderHistory;
