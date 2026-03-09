@@ -50,6 +50,9 @@ public class Product {
     @JsonbTransient
     private boolean isActive;
 
+    @Column(name = "img")
+    private String img;
+
     // Konstruktor
     public Product() {
     }
@@ -101,5 +104,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

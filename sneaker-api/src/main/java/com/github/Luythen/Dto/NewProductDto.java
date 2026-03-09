@@ -3,12 +3,13 @@ package com.github.Luythen.Dto;
 import java.math.BigDecimal;
 
 public class NewProductDto {
-    
+
     private String category;
     private String name;
     private String description;
     private boolean isActive;
     private BigDecimal price;
+    private String img;
 
     public BigDecimal getPrice() {
         return price;
@@ -60,5 +61,11 @@ public class NewProductDto {
         this.productVariant = productVariant;
     }
 
-    
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 }
