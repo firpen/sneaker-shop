@@ -45,7 +45,7 @@ public class ProductService {
         }
 
         try {
-            
+
             Product product = new Product();
             product.setActive(newProductDto.isActive());
             product.setCategory(category);
@@ -62,7 +62,7 @@ public class ProductService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public void createProductVariant (Product product, ProductVariantDto[] productVariants) {
+    public void createProductVariant(Product product, ProductVariantDto[] productVariants) {
         for (ProductVariantDto pv : productVariants) {
             ProductVariant productVariant = new ProductVariant();
             productVariant.setProduct(product);
@@ -98,8 +98,18 @@ public class ProductService {
         product.setName(updatedProduct.getName());
         product.setDescription(updatedProduct.getDescription());
         product.setPrice(updatedProduct.getPrice());
-        product.setCategory(updatedProduct.getCategory());
-
+        // Resolve category from DB
+        Category category = null;
+        if (updatedProduct.getCategory() != null) {
+            Long catId = null;
+            if (updatedProduct.getCategory().getCategoryId() != null) {
+                catId = updatedProduct.getCategory().getCategoryId();
+            }
+            if (catId != null) {
+                category = em.find(Category.class, catId);
+            }
+        }
+        product.setCategory(category);
         return product;
     }
 
