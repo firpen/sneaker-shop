@@ -11,10 +11,11 @@ export function CartProvider({ children }) {
 
   const addItem = (item) => setItems((prev) => [...prev, item]);
   const removeItem = (id) => setItems((prev) => prev.filter((item) => item.id !== id));
+  const clearItems = () => setItems([]);
   const itemCount = items.length;
 
   return (
-    <CartContext.Provider value={{ items, setItems, addItem, removeItem, itemCount }}>
+    <CartContext.Provider value={{ items, setItems, addItem, removeItem, clearItems, itemCount }}>
       {children}
     </CartContext.Provider>
   );
