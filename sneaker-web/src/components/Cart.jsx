@@ -1,24 +1,15 @@
 import { useSession } from "../components/useSession";
 import React, { useState } from "react";
 import '../css/Cart.css';
+import { useCart } from "./CartContext";
 
 function Cart() {
     const { isLoggedIn, userInfo } = useSession();
-
-    const [items, setItems] = useState([
-        { id: 1, name: "Nike Sneakers", price: 129, img: "/sneaker1.png" },
-        { id: 2, name: "Nike Sneakers", price: 129, img: "/sneaker2.png" },
-        { id: 3, name: "Nike Sneakers", price: 129, img: "/sneaker3.png" }
-    ]);
+    const { items, removeItem } = useCart();
     const [code, setCode] = useState("");
 
     const total = items.reduce((sum, item) => sum + item.price, 0);
     const shipping = 5;
-
-    // Remove item by id
-    const removeItem = (id) => {
-        setItems(items.filter(item => item.id !== id));
-    };
 
     // Redeem code (simple alert)
     const redeemCode = () => {
