@@ -2,7 +2,9 @@ import { useEffect, useState } from "react"
 
 export const GetProducts = () => {
     const [products, setProducts] = useState([]);
-    const [error, setError] = useState("");
+    const [productError, setError] = useState("");
+
+    const [productLoading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch("http://localhost:8080/api/products", {
@@ -11,20 +13,18 @@ export const GetProducts = () => {
             },
             credentials: "include"
         }).then((response) => {
-            if (response.status === 200) {
-                return response.json()
-            } else {
-                setError("Something went wrong")
-            }
+            if (!response.ok) throw new Error("Failed to fetch products")
+            return response.json()
         }).then((data) => {
             setProducts(data)
         }).catch((e) => {
-            setError("Internal server error")
-        })
+            setError(e.message)
+        }).finally(() => setLoading(false))
     }, [])
 
     return {
         products,
-        error
+        productError,
+        productLoading
     }
 }
