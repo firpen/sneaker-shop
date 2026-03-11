@@ -103,4 +103,20 @@ public class AuthResource {
         }
     }
 
+    @POST
+    @Path("/logout")
+    @PermitAll
+    public Response logout() {
+        NewCookie cookie = new NewCookie.Builder("token")
+                .value("")
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .domain("localhost")
+                .maxAge(0)
+                .build();
+
+        return Response.ok("Logged Out").cookie(cookie).build();
+    }
+
 }

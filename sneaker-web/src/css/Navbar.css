@@ -17,7 +17,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   cursor: pointer;
   transition: box-shadow 0.2s, background 0.2s;
-  margin-left: 16px;
+  margin-left: -16px;
   padding: 0;
 }
 .user-menu-btn:hover, .user-menu-btn:focus {
