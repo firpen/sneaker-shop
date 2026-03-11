@@ -1,9 +1,11 @@
 import { useSession } from "../components/useSession";
 import React, { useState } from "react";
 import '../css/Product.css';
+import { useCart } from "./CartContext";
 
 function Product() {
     const { isLoggedIn, userInfo } = useSession();
+    const { addItem } = useCart();
 
     const [color, setColor] = useState("White");
     const [size, setSize] = useState("");
@@ -13,14 +15,25 @@ function Product() {
     ];
     const sizeOptions = ["39", "40", "41", "42", "43", "44"];
 
-    // Add to cart
-    const addToCart = () => {
-        alert(`Added to cart!\nSize: ${size}\nColor: ${color}\n(Not functional)`);
-    };
-
     // Select image based on color
     const shoeImg = color === "Black" ? "/nike-air-force-black.png" : "/nike-air-force.png";
     const selectedItem = { name: "Nike Air Force 1", price: 129, img: shoeImg, color };
+
+    // Add to cart
+    const addToCart = () => {
+        if (!size) {
+            alert("Please select a size");
+            return;
+        }
+        addItem({
+            id: Date.now(),
+            name: selectedItem.name,
+            price: selectedItem.price,
+            img: selectedItem.img,
+            color,
+            size,
+        });
+    };
 
     return (
         <section className="pageWrap">
