@@ -93,9 +93,31 @@ public class OrderService {
     public List<Order> getAllOrders() {
         try {
             return em.createQuery("SELECT o FROM Order o", Order.class).getResultList();
-        }   catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public Order updateOrderStatus(int orderId, String status) {
+        Order order = em.createQuery(
+                "SELECT o FROM Order o LEFT JOIN FETCH o.orderItems oi LEFT JOIN FETCH oi.productVariant pv LEFT JOIN FETCH pv.product WHERE o.orderId = :orderId",
+                Order.class)
+                .setParameter("orderId", orderId)
+                .getSingleResult();
+        if (order == null)
+            return null;
+        order.setStatus(status);
+        return order;
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public boolean cancelOrder(int orderId) {
+        Order order = em.find(Order.class, orderId);
+        if (order == null)
+            return false;
+        order.setStatus("CANCELLED");
+        return true;
     }
 
 }
