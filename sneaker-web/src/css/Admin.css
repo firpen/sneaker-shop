@@ -41,6 +41,15 @@
     box-sizing: border-box;
 }
 
+.admin-card select {
+    border: 1px solid #afadad;
+    border-radius: 4px;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
 .admin-card input[type="button"] {
     border: 1px solid rgb(46, 46, 207);
     border-radius: 5%;
@@ -101,4 +110,57 @@
     width: 20%;
     align-items: end !important;
     justify-self: end !important;
+}
+
+.admin-product-card {
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #afadad;
+    margin-top: 1rem;
+    display: flex;
+}
+
+.admin-product-card .icon {
+    background-color: rgb(255, 255, 255);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 3rem;
+    border: 1px solid #afadad;
+    border-radius: 100%;
+}
+
+.admin-product-card .icon:hover {
+    background-color: rgb(203, 203, 209);
+}
+
+.admin-product-card .edit {
+    background-color: rgb(46, 46, 207);
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 6rem;
+    border: 1px solid #afadad;
+    border-radius: 4px;
+}
+
+.admin-product-card .edit:hover {
+    background-color: rgb(56, 56, 233);
+}
+
+.admin-product-card .delete {
+    background-color: rgb(207, 46, 46);
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 6rem;
+    border: 1px solid #afadad;
+    border-radius: 4px;
+}
+
+.admin-product-card .delete:hover {
+    background-color: rgb(233, 56, 56);
+}
+
+.admin-product-card h2 {
+    padding: 0 0 0 20px;
 }
