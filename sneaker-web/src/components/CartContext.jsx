@@ -1,13 +1,22 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
+function loadCart() {
+  try {
+    const data = localStorage.getItem("cart");
+    return data ? JSON.parse(data) : [];
+  } catch {
+    return [];
+  }
+}
+
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([
-    { id: 1, name: "Nike Sneakers", price: 129, img: "/sneaker1.png" },
-    { id: 2, name: "Nike Sneakers", price: 129, img: "/sneaker2.png" },
-    { id: 3, name: "Nike Sneakers", price: 129, img: "/sneaker3.png" },
-  ]);
+  const [items, setItems] = useState(loadCart);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(items));
+  }, [items]);
 
   const addItem = (item) => setItems((prev) => [...prev, item]);
   const removeItem = (id) => setItems((prev) => prev.filter((item) => item.id !== id));

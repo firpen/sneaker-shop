@@ -2,10 +2,10 @@
 .pageWrap {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 40px;
-    min-height: 100vh;
-    padding: 0;
+    min-height: 50vh;
+    padding-top: 200px;
     max-width: 1100px;
     margin: 0 auto;
 }
