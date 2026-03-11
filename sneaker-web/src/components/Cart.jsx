@@ -34,6 +34,7 @@ function Cart() {
                             <div className="cart-item-info">
                                 <p>{item.name}</p>
                                 <p>${item.price}</p>
+                                {item.size && <p>Size: {item.size}</p>}
                             </div>
                             <button className="cart-delete-btn" onClick={() => removeItem(item.id)}>X</button>
                         </div>
