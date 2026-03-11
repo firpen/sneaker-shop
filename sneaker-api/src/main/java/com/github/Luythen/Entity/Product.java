@@ -23,7 +23,6 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // @JsonbTransient
     private Long productId;
 
     @ManyToOne
