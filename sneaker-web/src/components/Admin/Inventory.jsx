@@ -13,7 +13,7 @@ function Inventory() {
     // Fetch products from backend
     const fetchProducts = () => {
         setLoading(true);
-        fetch("http://localhost:8080/api/products")
+        fetch("http://localhost:8080/api/products", { credentials: "include" })
             .then(res => res.json())
             .then(data => {
                 setProducts(Array.isArray(data) ? data : []);
@@ -48,7 +48,7 @@ function Inventory() {
     const handleDelete = async (id) => {
         if (!window.confirm("Delete this product?")) return;
         setLoading(true);
-        await fetch(`http://localhost:8080/api/products/${id}`, { method: "DELETE" });
+        await fetch(`http://localhost:8080/api/products/${id}`, { method: "DELETE", credentials: "include" });
         fetchProducts();
     };
 
@@ -71,7 +71,8 @@ function Inventory() {
             await fetch(`http://localhost:8080/api/products/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(updatedProduct)
+                body: JSON.stringify(updatedProduct),
+                credentials: "include"
             });
             fetchProducts();
         }
@@ -93,7 +94,8 @@ function Inventory() {
                     isActive: true,
                     productVariant: [{ size: 42, color: "White" }],
                     img: "/sneaker2.png"
-                })
+                }),
+                credentials: "include"
             });
             fetchProducts();
         }
