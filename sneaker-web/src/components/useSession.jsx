@@ -7,9 +7,6 @@ export const useSession = () => {
 
     useEffect(() => {
         fetch("http://localhost:8080/api/auth/me", {
-            headers: {
-                "Content-Type": "application/json"
-            },
             credentials: "include"
         }).then((response) => {
             if (response.status === 200) {

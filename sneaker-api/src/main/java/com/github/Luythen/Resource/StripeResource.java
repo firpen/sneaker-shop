@@ -2,9 +2,11 @@ package com.github.Luythen.Resource;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
-import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import com.github.Luythen.Dto.CreateCheckoutSessionDto;
 import com.github.Luythen.Dto.StripeSessionDto;
 import com.github.Luythen.Service.StripeService;
 import com.stripe.Stripe;
@@ -34,38 +36,44 @@ public class StripeResource {
     @Inject
     StripeService stripeService;
 
-    @Inject
-    JsonWebToken jwt;
+    @ConfigProperty(name = "sneaker.stripe.secret-key")
+    Optional<String> stripeSecretKey;
 
-    public StripeResource () {
-        Stripe.apiKey = "";
+    private boolean stripeConfigured() {
+        return stripeSecretKey.isPresent() && !stripeSecretKey.get().isBlank();
     }
 
     @POST
     @Path("/create-checkout-session")
     @PermitAll
-    public Response createCheckoutSession (@Context SecurityContext ctx) {
-        if (ctx.getUserPrincipal().getName().equals(jwt.getName())) {
-                SessionCreateParams params = stripeService.createSessionCheckoutParams(jwt.getName());
-
-            try {
-                Session session = Session.create(params);
-                Map<String, String> map = new HashMap<>();
-                map.put("clientSecret", session.getClientSecret());
-                return Response.ok(map).build();   
-            } catch (StripeException e) {
-                return Response.status(404).entity(e.getMessage()).build();
-            }
+    public Response createCheckoutSession (@Valid CreateCheckoutSessionDto request, @Context SecurityContext ctx) {
+        if (!stripeConfigured()) {
+            return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("Stripe is not configured").build();
         }
 
-        return Response.status(403).build();
+        try {
+            Stripe.apiKey = stripeSecretKey.orElseThrow();
+            SessionCreateParams params = stripeService.createSessionCheckoutParams(request.getItems());
+
+            Session session = Session.create(params);
+            Map<String, String> map = new HashMap<>();
+            map.put("clientSecret", session.getClientSecret());
+            return Response.ok(map).build();
+        } catch (StripeException e) {
+            return Response.status(404).entity(e.getMessage()).build();
+        }
     }
     
     @POST
     @Path("/session-status")
     @PermitAll
     public Response sessionStatus (@Valid StripeSessionDto sessionDto) {
+        if (!stripeConfigured()) {
+            return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("Stripe is not configured").build();
+        }
+
         try {
+            Stripe.apiKey = stripeSecretKey.orElseThrow();
             Session session = Session.retrieve(sessionDto.getSessionID());
 
             Map<String, String> map = new HashMap<>();

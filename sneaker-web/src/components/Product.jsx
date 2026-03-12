@@ -19,20 +19,33 @@ function Product() {
     const shoeImg = color === "Black" ? "/nike-air-force-black.png" : "/nike-air-force.png";
     const selectedItem = { name: "Nike Air Force 1", price: 129, img: shoeImg, color };
 
+    // Select product quantity
+    const [quantity, setQuantity] = useState(1);
+
+    const handleDecrement = () => {
+        if (quantity > 1) { setQuantity(prevCount => prevCount - 1); }
+    }
+
+    const handleIncrement = () => {
+        if (quantity < 10) { setQuantity(prevCount => prevCount + 1); }
+    }
+
     // Add to cart
     const addToCart = () => {
         if (!size) {
             alert("Please select a size");
             return;
         }
-        addItem({
-            id: Date.now(),
-            name: selectedItem.name,
-            price: selectedItem.price,
-            img: selectedItem.img,
-            color,
-            size,
-        });
+        for (let i = 0; i < quantity; i++) {
+            addItem({
+                id: Date.now() + i,
+                name: selectedItem.name,
+                price: selectedItem.price,
+                img: selectedItem.img,
+                color,
+                size,
+            });
+        }
     };
 
     return (
@@ -76,9 +89,32 @@ function Product() {
                         ))}
                     </div>
                 </div>
-                <button onClick={addToCart} className="add-cart-btn">
-                    Add to Cart
-                </button>
+
+                <div className="quantity-cart-group">
+                    <label className="quantity-label" htmlFor="product-quantity">Quantity:</label>
+                    <div className="quantity-control" id="product-quantity">
+                        <button
+                            type="button"
+                            onClick={handleDecrement}
+                            className="productQuantity"
+                            aria-label="Decrease quantity"
+                        >
+                            -
+                        </button>
+                        <div className="form-control text-center quantity-display" tabIndex={0} aria-live="polite">{quantity}</div>
+                        <button
+                            type="button"
+                            onClick={handleIncrement}
+                            className="productQuantity"
+                            aria-label="Increase quantity"
+                        >
+                            +
+                        </button>
+                    </div>
+                    <button onClick={addToCart} className="add-cart-btn">
+                        Add to Cart
+                    </button>
+                </div>
             </div>
         </section>
     );

@@ -17,6 +17,7 @@ import OrderHistory from "./OrderHistory"
 import { useSession } from "./useSession"
 import AdminOrderHistory from "./Admin/AdminOrderHistory"
 import { CartProvider, useCart } from "./CartContext"
+import Return from "./Return"
 
 function App() {
   const { isLoggedIn, userInfo, adminAccess } = useSession();
@@ -36,8 +37,21 @@ function App() {
         <nav className={`navbar-links${isHome ? " navbar-links-home" : ""}`}>
           <a href="/" className="navbar-link">Home</a>
           <a href="/products" className="navbar-link">Products</a>
-          <a href="#" className="navbar-link">Contact</a>
-          <a href="#" className="navbar-link">About Us</a>
+          
+            {
+              adminAccess ? (
+              <>
+              <a href="/admin/order-history" className="navbar-link">Order History</a>
+              <a href="/admin/inventory" className="navbar-link">Inventory</a>
+              </>
+              ) : (
+                <>
+                <a href="#" className="navbar-link">Contact</a>
+                <a href="#" className="navbar-link">About Us</a>
+                </>
+              )}
+          
+          
           <CartIconWithCount />
           <UserMenu isLoggedIn={isLoggedIn} userInfo={userInfo} />
         </nav>
@@ -54,12 +68,13 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/product/:productid" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/return" element={<Return />} />
         <Route path="/user" element={<User />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={ !adminAccess ? <h1>404</h1> : <Admin userInfo={userInfo} />} />
-        <Route path="/admin/inventory" element={<Inventory />} />
-        <Route path="/admin/product/:productid" element={<AdminProduct />} />
+        <Route path="/admin/inventory" element={!adminAccess ? <h1>404</h1> :<Inventory />} />
+        <Route path="/admin/product/:productid" element={!adminAccess ? <h1>404</h1> :<AdminProduct />} />
         <Route path="/admin/order-history" element={!adminAccess ? <h1>404</h1> : <AdminOrderHistory />} />
         <Route path="/order-history" element={<OrderHistory />} />
       </Routes>
