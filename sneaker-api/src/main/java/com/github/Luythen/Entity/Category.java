@@ -19,7 +19,6 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "categoryId")
-    @JsonbTransient
     private Long categoryId;
 
     @Column(length = 200, name = "name", nullable = false)
