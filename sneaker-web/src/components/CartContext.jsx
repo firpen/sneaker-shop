@@ -23,8 +23,29 @@ export function CartProvider({ children }) {
   const clearItems = () => setItems([]);
   const itemCount = items.length;
 
+  const checkoutItems = items.reduce((accumulator, item) => {
+    const existingItem = accumulator.find(
+      (currentItem) => currentItem.name === item.name && currentItem.price === item.price && currentItem.size === item.size && currentItem.color === item.color
+    );
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+      return accumulator;
+    }
+
+    accumulator.push({
+      name: item.name,
+      price: item.price,
+      size: item.size,
+      color: item.color,
+      quantity: 1,
+    });
+
+    return accumulator;
+  }, []);
+
   return (
-    <CartContext.Provider value={{ items, setItems, addItem, removeItem, clearItems, itemCount }}>
+    <CartContext.Provider value={{ items, setItems, addItem, removeItem, clearItems, itemCount, checkoutItems }}>
       {children}
     </CartContext.Provider>
   );
