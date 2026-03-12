@@ -17,6 +17,7 @@ import OrderHistory from "./OrderHistory"
 import { useSession } from "./useSession"
 import AdminOrderHistory from "./Admin/AdminOrderHistory"
 import { CartProvider, useCart } from "./CartContext"
+import Return from "./Return"
 
 function App() {
   const { isLoggedIn, userInfo, adminAccess } = useSession();
@@ -67,6 +68,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/product/:productid" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/return" element={<Return />} />
         <Route path="/user" element={<User />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

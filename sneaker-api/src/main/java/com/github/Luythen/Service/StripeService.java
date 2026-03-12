@@ -2,32 +2,34 @@ package com.github.Luythen.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
-import com.github.Luythen.Entity.CartItem;
+import com.github.Luythen.Dto.CheckoutItemDto;
 import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.param.checkout.SessionCreateParams.LineItem;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class StripeService {
-    
-    @Inject
-    CartService cartService;
 
-    private List<LineItem> createLineItems (String userID) {
+    private List<LineItem> createLineItems (List<CheckoutItemDto> items) {
         List<LineItem> lineItems = new ArrayList<>();
-        List<CartItem> cardItems = cartService.getCartItems(userID);
-        
-        cardItems.forEach((item) -> {
+
+        items.forEach((item) -> {
+            long unitAmount = item.getPrice()
+                    .multiply(BigDecimal.valueOf(100))
+                    .setScale(0, RoundingMode.HALF_UP)
+                    .longValueExact();
+
             LineItem lineItem = LineItem.builder()
                 .setQuantity(Long.valueOf(item.getQuantity()))
                 .setPriceData(LineItem.PriceData.builder()
-                    .setCurrency("eur")
-                    .setUnitAmountDecimal(item.getProductVariant().getProduct().getPrice())
+                    .setCurrency("usd")
+                    .setUnitAmount(unitAmount)
                     .setProductData(LineItem.PriceData.ProductData.builder()
-                        .setName(item.getProductVariant().getProduct().getName())
+                        .setName(item.getName())
                     .build()
                 ).build()
             ).build();
@@ -38,12 +40,12 @@ public class StripeService {
         return lineItems;
     }
 
-    public SessionCreateParams createSessionCheckoutParams (String userID) {
-        List<LineItem> lineItems = createLineItems(userID);
+    public SessionCreateParams createSessionCheckoutParams (List<CheckoutItemDto> items) {
+        List<LineItem> lineItems = createLineItems(items);
         
         SessionCreateParams params = SessionCreateParams.builder()
             .setMode(SessionCreateParams.Mode.PAYMENT)
-            .setUiMode(SessionCreateParams.UiMode.CUSTOM)
+            .setUiMode(SessionCreateParams.UiMode.EMBEDDED)
             .setReturnUrl("http://localhost:3000/return?session_id={CHECKOUT_SESSION_ID}")
             .addAllLineItem(lineItems).build();
 

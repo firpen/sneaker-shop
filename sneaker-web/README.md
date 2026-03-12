@@ -2,6 +2,30 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Local Stripe setup
+
+The checkout UI requires a Stripe publishable key in the frontend environment.
+
+Create a local environment file named `.env.local` in `sneaker-web` with:
+
+```env
+REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key_here
+```
+
+Then restart the frontend dev server:
+
+```powershell
+npm start
+```
+
+The backend also needs a Stripe secret key before checkout requests can succeed:
+
+```powershell
+$env:STRIPE_SECRET_KEY="sk_test_your_secret_key_here"
+$env:FRONTEND_ORIGIN="http://localhost:3000"
+.\mvnw.cmd quarkus:dev
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
