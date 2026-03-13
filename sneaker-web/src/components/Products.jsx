@@ -76,7 +76,7 @@ function Products() {
             style={{ cursor: "pointer" }}
           >
             <img
-              src={`http://localhost:5050/images/${product.img}` || "nike-air-force.png"}
+              src={`http://localhost:8080/images/${product.img}` || "nike-air-force.png"}
               alt={product.name}
               className="shop-icon-img"
             />
