@@ -57,7 +57,7 @@ public class ProductResource {
     @PUT
     @Path("/{id}")
     @RolesAllowed("Admin")
-    public Response update(@PathParam("id") Long id, Product updatedProduct) {
+    public Response update(@PathParam("id") Long id, NewProductDto updatedProduct) {
         try {
             Product product = productService.updateProduct(id, updatedProduct);
             return Response.ok(product).build();
