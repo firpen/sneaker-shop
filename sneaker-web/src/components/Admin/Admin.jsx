@@ -34,7 +34,10 @@ function Admin ({ userInfo }) {
 
     const ListCategories = () => {
         return (
-            <select name="categories" value={productCategory} onChange={(e) => setProductCategory(e.target.value)}>
+            <select name="categories" value={productCategory} onChange={(e) => {
+                setProductCategory(e.target.value)
+                console.log(e.target.value)
+            }}>
                 <option value={"Select a category"}>Select a category</option>
                 {categories.map(c => (
                     <option key={c.categoryId} onSelect={() => console.log(c.categoryId)} value={c.categoryId}>{c.name}</option>
@@ -53,7 +56,7 @@ function Admin ({ userInfo }) {
 
     const handleCreateProductClick = () => {
         if (validate()) {
-            fetch("http://localhost:8080/api/products", {
+            fetch(`http://localhost:8080/api/products`, {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
@@ -68,6 +71,8 @@ function Admin ({ userInfo }) {
                     "img": productImage,
                     "productVariant": selectedSizes
                 })
+            }).then((response) => {
+               if (response.ok)  window.location.reload();
             })
         }
     }
@@ -84,7 +89,8 @@ function Admin ({ userInfo }) {
     const handleImageChange = (e) => {
         const reader = new FileReader();
         reader.onload = () => {
-            setProductImage(reader.result)
+            const base64 = reader.result.replace("data:", "").replace(/^.+,/, '');
+            setProductImage(base64)
         }
 
         reader.readAsDataURL(e.target.files[0])

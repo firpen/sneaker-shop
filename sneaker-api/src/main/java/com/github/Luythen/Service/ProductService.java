@@ -7,7 +7,6 @@ import com.github.Luythen.Dto.ProductVariantDto;
 import com.github.Luythen.Entity.Category;
 import com.github.Luythen.Entity.Product;
 import com.github.Luythen.Entity.ProductVariant;
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -35,6 +34,7 @@ public class ProductService {
 
     @Transactional(Transactional.TxType.REQUIRED)
     public Product createProduct(NewProductDto newProductDto) throws Exception {
+        ImageService imageService = new ImageService();
         if (getProductByName(newProductDto.getName()) != null) {
             throw new Exception("Product with that name already exists");
         }
@@ -52,7 +52,9 @@ public class ProductService {
             product.setName(newProductDto.getName());
             product.setDescription(newProductDto.getDescription());
             product.setPrice(newProductDto.getPrice());
-
+            
+            String img = imageService.SaveImage(newProductDto.getImg(), newProductDto.getName());
+            product.setImg(img);
             em.persist(product);
 
             return product;
@@ -90,7 +92,7 @@ public class ProductService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public Product updateProduct(Long id, Product updatedProduct) throws Exception {
+    public Product updateProduct(Long id, NewProductDto updatedProduct) throws Exception {
         Product product = getProductById(id);
         if (product == null) {
             throw new Exception("Product not found");
@@ -102,8 +104,8 @@ public class ProductService {
         Category category = null;
         if (updatedProduct.getCategory() != null) {
             Long catId = null;
-            if (updatedProduct.getCategory().getCategoryId() != null) {
-                catId = updatedProduct.getCategory().getCategoryId();
+            if (updatedProduct.getCategory() != null) {
+                catId = Long.valueOf(updatedProduct.getCategory());
             }
             if (catId != null) {
                 category = em.find(Category.class, catId);
