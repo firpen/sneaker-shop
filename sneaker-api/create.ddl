@@ -126,12 +126,13 @@ INSERT INTO users (userid, email, passwordhash, firstname, lastname, role, creat
 INSERT INTO t_category (name) VALUES ('Lifestyle');
 INSERT INTO t_product (categoryid, product_name, description, price, isActive) VALUES (1, 'Nike Air Force 1', 'Classic Nike sneaker', 129.00, true);
 INSERT INTO t_product_variant (product_id, size, color, priceoverride) VALUES (1, '42', 'White', 129.00);
-INSERT INTO t_product_variant (product_id, size, color, priceoverride) VALUES (1, '42', 'Black', 129.00);
+INSERT INTO t_product_variant (product_id, size, color, priceoverride) VALUES (1, '44', 'White', 129.00);
+INSERT INTO t_product_variant (product_id, size, color, priceoverride) VALUES (1, '43', 'White', 129.00);
 INSERT INTO t_order (userid, status, totalamount, createdat) VALUES ('test-user-id-1234', 'DELIVERED', 1399.95, NOW());
 INSERT INTO t_order (userid, status, totalamount, createdat) VALUES ('test-user-id-1234', 'DELIVERED', 1399.95, NOW());
 INSERT INTO t_order (userid, status, totalamount, createdat) VALUES ('test-user-id-1234', 'DELIVERED', 1399.95, NOW());
 INSERT INTO orderitem (order_id, variantid, quantity, price) VALUES (1, 1, 1, 129.00);
 INSERT INTO orderitem (order_id, variantid, quantity, price) VALUES (1, 2, 2, 129.00);
-INSERT INTO t_product (productId, product_name, description, price, isActive, img) VALUES (1, 'Sneaker Classic', 'En klassisk sneaker', 120, true, '/sneaker2.png');
-INSERT INTO t_product_variant (variantId, product_id, size, color) VALUES (1, 1, '42', 'White');
-INSERT INTO inventory (inventoryId, variantId, stockQty, reservedQty) VALUES (1, 1, 10, 0);
+INSERT INTO t_product (product_name, description, price, isActive, img) VALUES ('Sneaker Classic', 'En klassisk sneaker', 120, true, '/sneaker2.png');
+INSERT INTO t_product_variant (product_id, size, color) VALUES (2, '42', 'White');
+INSERT INTO inventory (variantId, stockQty, reservedQty) VALUES (4, 10, 0);

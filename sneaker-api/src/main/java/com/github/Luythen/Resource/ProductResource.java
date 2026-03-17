@@ -66,6 +66,17 @@ public class ProductResource {
         }
     }
 
+    @PUT
+    @Path("/{id}/update-status")
+    public Response updateStatus (@PathParam("id") Long id) {
+        try {
+            productService.updateProductStatus(id);
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.status(404).entity(e.getMessage()).build();
+        }
+    }
+
     @DELETE
     @Path("/{id}")
     @RolesAllowed("Admin")

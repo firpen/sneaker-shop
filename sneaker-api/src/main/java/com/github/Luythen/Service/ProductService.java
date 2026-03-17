@@ -116,6 +116,18 @@ public class ProductService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
+    public void updateProductStatus (Long id) throws Exception {
+        try {
+            Product product = getProductById(id);
+            product.setActive(!product.isActive());
+
+            em.merge(product);
+        } catch (Exception e) {
+            throw new Exception("Can't find product");
+        }
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
     public boolean deleteProduct(Long id) throws Exception {
         Product product = getProductById(id);
         if (product == null) {
