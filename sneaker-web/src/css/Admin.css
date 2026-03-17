@@ -65,13 +65,33 @@
     background-color: rgb(56, 56, 233);
 }
 
-.addvariant {
+.variant-buttons {
+    display: grid !important;
+    grid-template-columns: auto auto;
+    gap: 0.1rem;
+}
+
+.exit {
+    background-color: rgb(207, 46, 46) !important;
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 6rem;
+    border: 1px solid #afadad !important;
+    border-radius: 4px;
+}
+
+.exit:hover {
+    background-color: rgb(233, 56, 56) !important;
+}
+
+.sizechart {
     display: grid !important;
     grid-template-columns: auto auto auto auto auto;
     gap: 0.1rem;
 }
 
-.addvariant input[type="button"] {
+.sizechart input[type="button"] {
     background-color: white;
     width: 100% !important;
     color: black;
@@ -80,11 +100,11 @@
     box-sizing: border-box;
 }
 
-.addvariant input[type="button"]:hover {
+.sizechart input[type="button"]:hover {
     background-color: rgb(219, 214, 214);
 }
 
-.addvariant .selected {
+.sizechart .selected {
     background-color: rgb(18, 131, 18) !important;
     color: white !important;
 }
@@ -110,6 +130,23 @@
     width: 20%;
     align-items: end !important;
     justify-self: end !important;
+}
+
+.admin-variant-card {
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #afadad;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+    display: flex;
+}
+
+.admin-variant-card h4 {
+    padding: 0 0 0 10px;
+}
+
+.admin-variant-card input[type="button"] {
+    width: 7.5rem;
 }
 
 .admin-product-card {

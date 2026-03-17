@@ -5,28 +5,28 @@ import { useCart } from "./CartContext";
 import {useParams} from "react-router-dom";
 
 function Product() {
-    const { isLoggedIn, userInfo } = useSession();
     const { addItem } = useCart();
     const {productid} = useParams();
     const [product, setProduct] = useState(null);
+
+    const [colorOptions, setColorOptions] = useState([])
+    const [sizeOptions, setSizeOptions] = useState([])
 
     useEffect(() => {
         fetch(`http://localhost:8080/api/products/${productid}`, {
             credentials: "include"
         })
         .then(res => res.json())
-        .then(data => setProduct(data));
+        .then(data => {
+            setColorOptions([...new Set(data.productVariants.map(pv => pv.color))])
+            setSizeOptions([...new Set(data.productVariants.map(pv => pv.size))])
+            setProduct(data)
+        })
     }, [productid])
 
 
     const [color, setColor] = useState("White");
     const [size, setSize] = useState("");
-    const colorOptions = [
-        { name: "White", value: "White" },
-        { name: "Black", value: "Black" }
-    ];
-    const sizeOptions = ["39", "40", "41", "42", "43", "44"];
-
     
     // Select product quantity
     const [quantity, setQuantity] = useState(1);
@@ -71,16 +71,16 @@ function Product() {
                     <div className="color-label">Color: {color}</div>
                     <div className="color-options">
                         {colorOptions.map(opt => (
-                            <label key={opt.value} className="color-label-item">
+                            <label key={opt} className="color-label-item">
                                 <input
                                     type="radio"
                                     name="color"
-                                    value={opt.value}
-                                    checked={color === opt.value}
-                                    onChange={() => setColor(opt.value)}
+                                    value={opt}
+                                    checked={color === opt}
+                                    onChange={() => setColor(opt)}
                                     style={{ display: 'none' }}
                                 />
-                                <span className={`color-circle ${opt.value.toLowerCase()}${color === opt.value ? ' selected' : ''}`}></span>
+                                <span className={`color-circle ${opt.toLowerCase()}${color === opt ? ' selected' : ''}`}></span>
                             </label>
                         ))}
                     </div>

@@ -8,14 +8,17 @@ function Home() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/products", {
+    fetch("http://localhost:5050/api/products", {
       credentials: "include",
     })
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((data) => setProducts(data))
+      .then((data) =>  {
+        const filterData = data.filter(d => d.active === true)
+        setProducts(filterData)
+      })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
@@ -37,7 +40,7 @@ function Home() {
               style={{ cursor: "pointer" }}
             >
               <img
-                src={product.img || "nike-air-force.png"}
+                src={`http://localhost:8080/images/${product.img}` || "nike-air-force.png"}
                 alt={product.name}
                 className="shop-icon-img"
               />
