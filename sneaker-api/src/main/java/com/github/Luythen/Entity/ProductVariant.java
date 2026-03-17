@@ -23,11 +23,11 @@ public class ProductVariant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonbTransient
     private Long variantId;
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "productId", nullable = false)
+    @JsonbTransient
     private Product product;
 
     @OneToOne(mappedBy = "productVariant")

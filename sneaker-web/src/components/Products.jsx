@@ -29,7 +29,8 @@ function Products() {
 
   const categories = [...new Set(products.map(p => p.category?.name).filter(Boolean))];
 
-  let filtered = products.slice();
+  let activeProductFilter = products.filter(p => p.active === true)
+  let filtered = activeProductFilter.slice();
   if (category) filtered = filtered.filter(p => p.category?.name === category);
   if (sort === "price-asc") filtered = filtered.sort((a, b) => a.price - b.price);
   if (sort === "price-desc") filtered = filtered.sort((a, b) => b.price - a.price);

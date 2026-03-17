@@ -9,7 +9,9 @@ function Admin ({ userInfo }) {
     const { categories, categoryError, categoryLoading } = GetCategories();
 
     const [selectedSizes, setSelectedSizes] = useState([]);
-    const sizeChart= [38, 38.5, 39, 40, 40.5, 41, 42, 42.5, 43, 44, 44.5, 45, 46, 46.5, 47];
+    const sizeChart= ["38", "38.5", "39", "40", "40.5", "41", "42", "42.5", "43", "44", "44.5", "45", "46", "46.5", "47"];
+
+    const [editMode, setEditMode] = useState(false);
 
     const [productColor, setProductColor] = useState("");
     const [productPrice, setProductPrice] = useState("");
@@ -21,13 +23,14 @@ function Admin ({ userInfo }) {
 
     const [error, setError] = useState("");
 
+    /** JSX components */
     const ListProducts = () => {
         return products.map(p => (
                 <div key={p.name} className="admin-product-card">
                     <h2>{p.name}</h2>
-                    <button className="icon">{p.active ? <i className="fa-solid fa-eye fa-2xl"></i> : <i className="fa-solid fa-eye-slash fa-2xl"></i>}</button>
+                    <button className="icon" onClick={() => handlePublicizeClick(p.productId)}>{p.active ? <i className="fa-solid fa-eye fa-2xl"></i> : <i className="fa-solid fa-eye-slash fa-2xl"></i>}</button>
                     <button className="delete">Delete</button>
-                    <button className="edit">Edit</button>
+                    <button className="edit" onClick={() => handleEditProductClick(p.productId)}>Edit</button>
                 </div>
             ))
     }
@@ -36,7 +39,6 @@ function Admin ({ userInfo }) {
         return (
             <select name="categories" value={productCategory} onChange={(e) => {
                 setProductCategory(e.target.value)
-                console.log(e.target.value)
             }}>
                 <option value={"Select a category"}>Select a category</option>
                 {categories.map(c => (
@@ -45,13 +47,39 @@ function Admin ({ userInfo }) {
             </select>
         )
     }
+    /** End JSX components */
 
-    const handleSizeClick = (e, size) => {
-        if (e.target.classList.contains("selected")) {
+    /** Variants Click Events */
+    const handleSizeClick = (target, size) => {
+        if (target.classList.contains("selected")) {
             setSelectedSizes(selectedSizes.filter(a => a.size !== size))
         } else if (productColor !== "") {
             setSelectedSizes([...selectedSizes, { color: productColor, size: size }])
         }
+    }
+    /** End Variants Click Events */
+
+    /** Click Events */
+    const handleEditProductClick = (productID) => {
+        const filter = products.filter(p => p.productId === productID)
+        setProductColor(filter[0].color)
+        setProductDesc(filter[0].description)
+        setProductName(filter[0].name)
+        setProductPrice(filter[0].price)
+        setProductCategory(filter[0].category.categoryId)
+        setSelectedSizes(filter[0].productVariants)
+        setEditMode(true)
+    }
+
+    const exitEditProductClick = (productID) => {
+        const filter = products.filter(p => p.productId === productID)
+        setProductColor("")
+        setProductDesc("")
+        setProductName("")
+        setProductPrice("")
+        setProductCategory("")
+        setSelectedSizes("")
+        setEditMode(false)
     }
 
     const handleCreateProductClick = () => {
@@ -77,6 +105,18 @@ function Admin ({ userInfo }) {
         }
     }
 
+    const handlePublicizeClick = (productID) => {
+        fetch(`http://localhost:8080/api/products/${productID}/update-status`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        }).then((response) => {
+            if (response.ok)  window.location.reload();
+        })
+    }
+
     const validate = () => {
         if (productCategory !== "" || productColor !== "" || productDesc !== "" || productName !== "" || productPrice !== "" || productImage !== "" || selectedSizes.length > 0) {
             return true;
@@ -85,7 +125,9 @@ function Admin ({ userInfo }) {
         setError("One of the fields is empty")
         return false
     }
+    /** End Click Events */
 
+    /** Change Events */
     const handleImageChange = (e) => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -95,6 +137,7 @@ function Admin ({ userInfo }) {
 
         reader.readAsDataURL(e.target.files[0])
     }
+    /** End Change Events */
 
     return (
         <div className="container">
@@ -118,18 +161,24 @@ function Admin ({ userInfo }) {
                             <label id="productColor">Color</label>
                             <input id="productColor" type="text" value={productColor} onChange={(e) => setProductColor(e.target.value)} />
                             <label id="productSize">Size</label>
-                            <div className="addvariant">
+                            <div className="sizechart">
                                 {sizeChart.map(size => (
-                                    <input type="button" className={selectedSizes.find(a => a.size === size) ? "selected" : ""} onClick={e => handleSizeClick(e, size)} key={size} value={size} />
+                                    <input type="button" id={size} className={selectedSizes.find(a => a.size === size) ? "selected" : ""} onClick={e => handleSizeClick(e.target, size)} key={size} value={size} />
                                 ))}
                             </div>
-                            <input type="button" onClick={handleCreateProductClick} value={"Create Products"} />
+                            { editMode ? <div>
+                                <input type="button" onClick={handleCreateProductClick} value={"Save"} />
+                                <input type="button" onClick={exitEditProductClick} value={"Exit"} />
+                            </div> : <input type="button" onClick={handleCreateProductClick} value={"Create Product"} /> }
                         </form>
                     </div>
                 </div>
                 <div className="col-item">
                     <div className="admin-card">
-                        <h1>Hello</h1>
+                        <h1>Search</h1>
+                        <form>
+                            <input />
+                        </form>
                     </div>
                     { productError ? <h1>{productError}</h1> : ""}
                     { productLoading ? <h1>Loading</h1> : <div>{ products.length > 0 ? <ListProducts /> : <h1>No products</h1>}</div> }
